@@ -84,7 +84,7 @@ cd ~/ros2_ws/src
 Navigate to your workspace source (`src`) directory and clone this package directly from GitHub:
 ```bash
 cd ~/ros2_ws/src
-git clone https://github.com RFID_reader
+git clone https://github.com/Mesha-M/RFID-reader.git RFID_reader
 ```
 
 ### 3. Compile the Package

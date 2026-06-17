@@ -159,7 +159,7 @@ READER_CONFIG = {
 ```
 ### Assigning pins to readers
 If you want to change which reader/holder is on which pin, open `RFID_reader/rfid_service.py` and modify the mapping dictionary. For example, changing Holder 1 pin from pin 2 to pin 18:
-```python
+```
 READER_CONFIG = {
     'Holder_1': 18,
     'Holder_2': 3,

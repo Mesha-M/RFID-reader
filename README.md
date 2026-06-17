@@ -16,7 +16,9 @@ sudo apt-get update
 sudo apt-get install python3-rpi.gpio
 ```
 ### 3. Required pip3
+```
 apt update && apt install -y python3-pip
+```
 
 ### 4. Required Python Packages
 The internal hardware drivers require Python's native SPI interaction layer:

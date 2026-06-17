@@ -15,10 +15,12 @@ The script uses `RPi.GPIO` to handle multiple Chip Select (CS) pins:
 sudo apt-get update
 sudo apt-get install python3-rpi.gpio
 ```
-### 3. Required pip3 and lgpio
+### 3. Required pip3, lgpio and serial
 ```
 apt update && apt install -y python3-pip
 apt-get update && apt-get install -y python3-lgpio
+apt-get update && apt-get install -y python3-serial
+
 
 ```
 

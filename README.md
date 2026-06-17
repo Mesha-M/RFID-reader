@@ -9,6 +9,23 @@ This project uses PN-532 NFC RFID V3 Readers mounted on robot tool holders to in
 * PN532 NFC RFID V3
 * SPI interface must be enabled on the Raspberry Pi. Run `sudo raspi-config`, navigate to **Interface Options -> SPI**, and enable it.
 
+### **IMPORTANT** If running inside a Docker Container 
+
+If you are running this package inside an isolated Docker container, the application will crash unless you explicitly grant the container access to the host's hardware bus layers.
+
+Whenever you instantiate or restart your container, ensure you use the following exact execution flags to bridge the host's CPU and SPI interfaces:
+
+```bash
+docker run -it \
+  --privileged \
+  --net=host \
+  -v /proc/cpuinfo:/proc/cpuinfo \
+  -v /dev:/dev \
+  --device /dev/spidev0.0 \
+  --device /dev/spidev0.1 \
+  ros:humble-ros-base
+```
+
 ### 2. Required System Libraries
 ```bash
 sudo apt update && sudo apt install -y \
@@ -71,23 +88,6 @@ Note that it is very easy to change which reader should be connected to which pi
 
 The raspberry pi4 should also be connected to a power supply as well as your network via a LAN cable. 
 # Installation
-### Running inside a Docker Container (Important)
-
-If you are running this package inside an isolated Docker container, the application will crash unless you explicitly grant the container access to the host's hardware bus layers.
-
-Whenever you instantiate or restart your container, ensure you use the following exact execution flags to bridge the host's CPU and SPI interfaces:
-
-```bash
-docker run -it \
-  --privileged \
-  --net=host \
-  -v /proc/cpuinfo:/proc/cpuinfo \
-  -v /dev:/dev \
-  --device /dev/spidev0.0 \
-  --device /dev/spidev0.1 \
-  ros:humble-ros-base
-```
-
 ### 1. Create a Workspace (If you don't have one)
 ```bash
 mkdir -p ~/ros2_ws/src

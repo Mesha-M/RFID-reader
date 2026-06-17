@@ -10,21 +10,15 @@ This project uses PN-532 NFC RFID V3 Readers mounted on robot tool holders to in
 * SPI interface must be enabled on the Raspberry Pi. Run `sudo raspi-config`, navigate to **Interface Options -> SPI**, and enable it.
 
 ### 2. Required System Libraries
-The script uses `RPi.GPIO` to handle multiple Chip Select (CS) pins:
 ```bash
-sudo apt-get update
-sudo apt-get install python3-rpi.gpio
-```
-### 3. Required pip3, lgpio and serial
-```
-apt update && apt install -y python3-pip
-apt-get update && apt-get install -y python3-lgpio
-apt-get update && apt-get install -y python3-serial
-
-
+sudo apt update && sudo apt install -y \
+  python3-pip \
+  python3-rpi.gpio \
+  python3-lgpio \
+  python3-serial
 ```
 
-### 4. Required Python Packages
+### 3. Spidev installation
 The internal hardware drivers require Python's native SPI interaction layer:
 ```bash
 pip3 install spidev
@@ -77,6 +71,22 @@ Note that it is very easy to change which reader should be connected to which pi
 
 The raspberry pi4 should also be connected to a power supply as well as your network via a LAN cable. 
 # Installation
+### Running inside a Docker Container (Important)
+
+If you are running this package inside an isolated Docker container, the application will crash unless you explicitly grant the container access to the host's hardware bus layers.
+
+Whenever you instantiate or restart your container, ensure you use the following exact execution flags to bridge the host's CPU and SPI interfaces:
+
+```bash
+docker run -it \
+  --privileged \
+  --net=host \
+  -v /proc/cpuinfo:/proc/cpuinfo \
+  -v /dev:/dev \
+  --device /dev/spidev0.0 \
+  --device /dev/spidev0.1 \
+  ros:humble-ros-base
+```
 
 ### 1. Create a Workspace (If you don't have one)
 ```bash

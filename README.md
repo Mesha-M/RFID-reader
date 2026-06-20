@@ -70,7 +70,7 @@ Note that it is very easy to change which reader should be connected to which pi
 |6.  |**15**|22|
 |7.  |**8**|14|
 |8.  |**10**|15|
-|9.  |**18**|18|
+|9.  |**12**|18|
 |10. |**16**|23|
 |11. |**18**|24|
 |12. |**22**|25|

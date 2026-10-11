@@ -18,12 +18,15 @@ Whenever you instantiate or restart your container, ensure you use the following
 ```bash
 docker run -it \
   --privileged \
-  --net=host \
+  --network host \
+  --ipc host \
   -v /proc/cpuinfo:/proc/cpuinfo \
   -v /dev:/dev \
+  --device /dev/gpiomem \
   --device /dev/spidev0.0 \
   --device /dev/spidev0.1 \
-  ros:humble-ros-base
+  -e ROS_DOMAIN_ID=42 \
+  -e ROS_LOCALHOST_ONLY=0 \
 ```
 
 ### 2. Required System Libraries
@@ -39,6 +42,12 @@ sudo apt update && sudo apt install -y \
 The internal hardware drivers require Python's native SPI interaction layer:
 ```bash
 pip3 install spidev
+```
+### 4. Enabling trigger from a different Linux computer on the same LAN network
+Run the following code in the terminal of the computer:
+```bash
+echo "export ROS_DOMAIN_ID=42" >> ~/.bashrc
+echo "export ROS_LOCALHOST_ONLY=0" >> ~/.bashrc
 ```
 
 # Wiring
